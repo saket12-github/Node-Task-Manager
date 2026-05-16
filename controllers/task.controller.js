@@ -1,5 +1,5 @@
 const homePage = async (req, res) => {
-  res.send("hello, this is task manager app");
+  res.send("Hello, This is Task Manager App");
 };
 const getAllTasks = async (req, res) => {
   res.send("hello");
