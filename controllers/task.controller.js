@@ -20,11 +20,42 @@ const getAllTasks = async (req, res) => {
   }
 };
 const getSingleTask = async (req, res) => {
-  res.send("hello");
+  try {
+    const { id: taskID } = req.params;
+    const task = await Tasks.findOne({ _id: taskID });
+    if (!task) {
+      return res.status(404).json({
+        success: false,
+        message: 'Task not found'
+      })
+    }
+    res.status(200).json({
+      success: true,
+      data: task
+    })
+
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message
+    })
+  }
 };
 const createTask = async (req, res) => {
-  res.send("hello");
+  try {
+    const task = await Tasks.create(req.body);
+    res.status(201).json({
+      success: true,
+      data: task
+    })
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message
+    })
+  }
 };
+
 const updateTask = async (req, res) => {
   res.send("hello");
 };
