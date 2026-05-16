@@ -1,8 +1,23 @@
+const Tasks = require('../models/tasks.model')
+
 const homePage = async (req, res) => {
-  res.send("Hello, This is Task Manager App");
+  res.status(200)
+  res.json("Hello, This is Task Manager App");
 };
+
 const getAllTasks = async (req, res) => {
-  res.send("hello");
+  try {
+    const tasks = await Tasks.find({});
+    res.status(200).json({
+      success: true,
+      data: tasks
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      data: error.message
+    });
+  }
 };
 const getSingleTask = async (req, res) => {
   res.send("hello");
